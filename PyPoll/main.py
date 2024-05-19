@@ -1,8 +1,9 @@
 import csv
 
-file_path = "PyPoll/Resources/election_data.csv"
+csv_file_path = "PyPoll/Resources/election_data.csv"
+results_file_path = "PyPoll/analysis/result.txt"
 
-with open(file_path, mode='r') as csvfile:
+with open(csv_file_path, mode='r') as csvfile:
     csv_reader = csv.DictReader(csvfile)
 
     # variable to count all the votes
@@ -34,33 +35,39 @@ with open(file_path, mode='r') as csvfile:
         else:
             vote_results[candidate] = 1
 
-    print("Election Results")
-    print("-------------------------")
-    print(f"Total Votes: {vote_count}")
-    print("-------------------------")
-
-    # To get the winner we will keep 2 empty variables
-    # winning_votes will keep track of the greatest number of votes
-    # winning_candidate will store the name when we get the greatest number of votes
-    winning_votes = 0
-    winning_candidate = ""
+    with open(results_file_path, mode='w') as file:
+        print("Election Results")
+        file.write("Election Results\n")
+        print("-------------------------")
+        file.write("-------------------------\n")
+        print(f"Total Votes: {vote_count}")
+        file.write(f"Total Votes: {vote_count}\n")
+        print("-------------------------")
+        file.write("-------------------------\n")
+        # To get the winner we will keep 2 empty variables
+        # winning_votes will keep track of the greatest number of votes
+        # winning_candidate will store the name when we get the greatest number of votes
+        winning_votes = 0
+        winning_candidate = ""
     
-    # vote_results is a dictionary
-    # vote_results.items() will return all rows
-    # Loop through all the vote_results.items()
-    # each row in vote_results will contain
-    # candidate name and number of votes for each candidate
-    for candidate_name, num_votes in vote_results.items():
-        percentage = num_votes / vote_count * 100
-        # Round off percentage to 2 decimal points
-        percentage = round(percentage, 2)
-        print(f"{candidate_name}: {percentage}% ({num_votes})")
-
-        if num_votes > winning_votes:
-            winning_votes = num_votes
-            winning_candidate = candidate_name
-    print("-------------------------")
-    print(f"Winner: {winning_candidate}")
-    print("-------------------------")
-
+        # vote_results is a dictionary
+        # vote_results.items() will return all rows
+        # Loop through all the vote_results.items()
+        # each row in vote_results will contain
+        # candidate name and number of votes for each candidate
+        for candidate_name, num_votes in vote_results.items():
+            percentage = num_votes / vote_count * 100
+            # Round off percentage to 3 decimal points
+            percentage = round(percentage, 3)
+            print(f"{candidate_name}: {percentage}% ({num_votes})")
+            file.write(f"{candidate_name}: {percentage}% ({num_votes})\n")
+            if num_votes > winning_votes:
+                winning_votes = num_votes
+                winning_candidate = candidate_name
+        print("-------------------------")
+        file.write("-------------------------\n")
+        print(f"Winner: {winning_candidate}")
+        file.write(f"Winner: {winning_candidate}\n")
+        print("-------------------------")
+        file.write("-------------------------\n")
 
