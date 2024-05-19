@@ -35,6 +35,12 @@ with open(file_path, mode='r') as csvfile:
             vote_results[candidate] = 1
 
     print(f"Total Votes: {vote_count}")
+
+    # To get the winner we will keep 2 empty variables
+    # winning_votes will keep track of the greatest number of votes
+    # winning_candidate will store the name when we get the greatest number of votes
+    winning_votes = 0
+    winning_candidate = ""
     
     # vote_results is a dictionary
     # vote_results.items() will return all rows
@@ -46,6 +52,11 @@ with open(file_path, mode='r') as csvfile:
         # Round off percentage to 2 decimal points
         percentage = round(percentage, 2)
         print(f"{candidate_name}: {percentage}% ({num_votes})")
+
+        if num_votes > winning_votes:
+            winning_votes = num_votes
+            winning_candidate = candidate_name
     
+    print(f"Winner: {winning_candidate}")
 
 
