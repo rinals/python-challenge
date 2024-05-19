@@ -34,7 +34,10 @@ with open(file_path, mode='r') as csvfile:
         else:
             vote_results[candidate] = 1
 
+    print("Election Results")
+    print("-------------------------")
     print(f"Total Votes: {vote_count}")
+    print("-------------------------")
 
     # To get the winner we will keep 2 empty variables
     # winning_votes will keep track of the greatest number of votes
@@ -56,7 +59,8 @@ with open(file_path, mode='r') as csvfile:
         if num_votes > winning_votes:
             winning_votes = num_votes
             winning_candidate = candidate_name
-    
+    print("-------------------------")
     print(f"Winner: {winning_candidate}")
+    print("-------------------------")
 
 
