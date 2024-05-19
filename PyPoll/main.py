@@ -35,6 +35,17 @@ with open(file_path, mode='r') as csvfile:
             vote_results[candidate] = 1
 
     print(f"Total Votes: {vote_count}")
-    print(vote_results)
+    
+    # vote_results is a dictionary
+    # vote_results.items() will return all rows
+    # Loop through all the vote_results.items()
+    # each row in vote_results will contain
+    # candidate name and number of votes for each candidate
+    for candidate_name, num_votes in vote_results.items():
+        percentage = num_votes / vote_count * 100
+        # Round off percentage to 2 decimal points
+        percentage = round(percentage, 2)
+        print(f"{candidate_name}: {percentage}% ({num_votes})")
+    
 
 
