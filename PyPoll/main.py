@@ -12,6 +12,11 @@ with open(csv_file_path, mode='r') as csvfile:
 
     # Empty dictionary to keep all the candidates
     # and increment number of votes they get
+    # Candidate  |  num_votes
+    #------------------------
+    # Charles    |  85213
+    # Diana      |  272892
+    # Raymon     |  11606
     vote_results = {}
 
     # Read each row in the CSV file as a dictionary
