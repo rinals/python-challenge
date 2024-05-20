@@ -10,15 +10,27 @@ with open(budget_file_path, "r") as file:
     total = 0
     previous_profit = 0
     total_change = 0
+    greatest_increase_in_profit = 0
+    month_of_greatest_increase = ""
+    greatest_decrease_in_profit = 0
+    month_of_greatest_decrease = ""
 
     for row in csv_reader:
         total_months += 1
         current_profit = int(row['Profit/Losses'])
+        current_date = row['Date']
         total += current_profit
 
         if rows_done > 0:
             change_in_profit = current_profit - previous_profit
             total_change += change_in_profit
+
+            if change_in_profit > greatest_increase_in_profit:
+                greatest_increase_in_profit = change_in_profit
+                month_of_greatest_increase = current_date
+            if change_in_profit < greatest_decrease_in_profit:
+                greatest_decrease_in_profit = change_in_profit
+                month_of_greatest_decrease = current_date
 
 
         rows_done += 1
@@ -33,3 +45,5 @@ with open(budget_file_path, "r") as file:
     print(f"Total Months: {total_months}")
     print(f"Total: ${total}")
     print(f"Average Change: ${average_change}")
+    print(f"Greatest Increase in Profits: {month_of_greatest_increase} (${greatest_increase_in_profit})")
+    print(f"Greatest Decrease in Profits: {month_of_greatest_decrease} (${greatest_decrease_in_profit})")
